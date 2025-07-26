@@ -4,29 +4,22 @@
 
 Minikube can run with several hypervisors. For this guide, we will use Docker. Make sure you have Docker installed first.
 
-## 2. Install Minikube
-
-Download the latest Minikube binary:
-
-```bash
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-```
-
-Make it executable and move it to your path:
-
-```bash
-chmod +x minikube
-sudo mv minikube /usr/local/bin/
-```
-
-## 3. Install kubectl
+## 2. Install kubectl
 
 `kubectl` is the command-line tool for interacting with a Kubernetes cluster. Download and install it:
 
 ```bash
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-chmod +x kubectl
-sudo mv kubectl /usr/local/bin/
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+```
+
+## 3. Install Minikube
+
+Download the latest Minikube binary:
+
+```bash
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
 ```
 
 ## 4. Start Minikube

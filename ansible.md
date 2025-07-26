@@ -1,11 +1,13 @@
 # How to Install Ansible on Debian/Ubuntu
 
-## 1. Update Package Lists
+## 1. Update Package Lists and Add Ansible PPA
 
-First, update your package lists:
+First, update your package lists and add the Ansible PPA:
 
 ```bash
 sudo apt update
+sudo apt install software-properties-common -y
+sudo add-apt-repository --yes --update ppa:ansible/ansible
 ```
 
 ## 2. Install Ansible

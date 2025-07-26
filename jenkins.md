@@ -2,23 +2,25 @@
 
 ## 1. Install Java
 
-Jenkins requires Java to run. Install the OpenJDK package:
+Jenkins requires Java to run. We will install OpenJDK 17, the latest LTS version:
 
 ```bash
 sudo apt update
-sudo apt install openjdk-11-jdk -y
+sudo apt install openjdk-17-jdk -y
+```
+Verify the installation:
+```bash
+java -version
 ```
 
 ## 2. Add the Jenkins Repository
 
-Add the Jenkins GPG key:
+Add the Jenkins GPG key and repository to your system:
 
 ```bash
-curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
   /usr/share/keyrings/jenkins-keyring.asc > /dev/null
 ```
-
-Add the Jenkins repository to your system:
 
 ```bash
 echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
@@ -28,7 +30,7 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
 
 ## 3. Install Jenkins
 
-Update your package lists and install Jenkins:
+Update your package lists again and install Jenkins:
 
 ```bash
 sudo apt update

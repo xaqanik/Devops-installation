@@ -5,36 +5,34 @@
 First, update your package lists and install the necessary packages to allow `apt` to use a repository over HTTPS:
 
 ```bash
-sudo apt update
-sudo apt install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release -y
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl
 ```
 
 Next, add Docker's official GPG key:
 
 ```bash
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
 ```
 
 Finally, set up the stable repository:
 
 ```bash
 echo \
-  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
 ## 2. Install Docker Engine
 
-Update your package lists again and install Docker Engine:
+Update your package lists again and install Docker Engine, along with the latest plugins:
 
 ```bash
-sudo apt update
-sudo apt install docker-ce docker-ce-cli containerd.io -y
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 ## 3. Verify the Installation
